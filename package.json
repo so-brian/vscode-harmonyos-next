@@ -26,7 +26,15 @@
         "command": "vscode-harmonyos-next.run",
         "title": "Run"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "group": "navigation",
+          "command": "vscode-harmonyos-next.helloWorld"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
