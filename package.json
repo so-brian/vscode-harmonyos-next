@@ -3,6 +3,11 @@
   "displayName": "HarmonyOS Next",
   "description": "",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/so-brian/vscode-harmonyos-next"
+  },
+  "publisher": "so-brian",
   "engines": {
     "vscode": "^1.87.0"
   },

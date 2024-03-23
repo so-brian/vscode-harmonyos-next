@@ -1,0 +1,84 @@
+name: Release
+on:
+    push:
+        tags:
+            - 'v*'
+
+env:
+    ARTIFACTORY_NAME: 'package'
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v4
+          with:
+            ref: ${{ github.ref }}
+
+        - name: Set up Node
+          uses: actions/setup-node@v4
+          with:
+              node-version: '20'
+
+        - name: Run npm
+          run: |
+            npm ci
+
+        - name: Setup vsce
+          run: |
+            npm install -g vsce
+
+        - name: Build package
+          run: |
+            vsce package
+
+        - name: Upload
+          uses: actions/upload-artifact@v4
+          with:
+            name: ${{env.ARTIFACTORY_NAME}}
+            path: ./*.vsix
+
+    release:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v4
+          with:
+            ref: ${{ github.ref }}
+
+        - uses: actions/download-artifact@v4
+          with:
+            name: ${{env.ARTIFACTORY_NAME}}
+
+        - name: Create release
+          env:
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          run: |
+            ls -al
+            tag=$(echo $GITHUB_REF | sed 's/refs\/tags\///')
+            gh release create "$tag" --generate-notes --title "$tag" ./*.vsix
+
+    publish:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+        - name: Setup vsce
+          run: |
+            npm install -g vsce
+
+        - uses: actions/download-artifact@v4
+          with:
+            name: ${{env.ARTIFACTORY_NAME}}
+
+        - name: Publish package
+          run: |
+            vsce publish -p ${{ secrets.VSCE_TOKEN }} --skip-duplicate
+
+    clean:
+        runs-on: ubuntu-latest
+        if: ${{ always() }}
+        needs: [build, release, publish]
+        steps:
+        - name: Clean up
+          uses: geekyeggo/delete-artifact@v5
+          with:
+            name: ${{env.ARTIFACTORY_NAME}}
