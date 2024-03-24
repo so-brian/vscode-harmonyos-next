@@ -1,9 +1,16 @@
-export class Command {
-    name: string;
-    handler: (...args: any[]) => any;
+import * as vscode from 'vscode';
 
-    constructor(name: string, handler: (...args: any[]) => any) {
-        this.name = name;
-        this.handler = handler;
-    }
+export abstract class Command implements vscode.Disposable {
+	private disposable: vscode.Disposable;
+
+	constructor(name: string) {
+		this.disposable = vscode.commands.registerCommand(name, this.run);
+		console.log(`Command ${name} registered`);
+	}
+
+	abstract run(...args: any[]): void;
+
+	dispose() {
+		this.disposable.dispose();
+	}
 }
