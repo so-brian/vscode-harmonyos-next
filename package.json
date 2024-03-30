@@ -25,6 +25,34 @@
       {
         "command": "vscode-harmonyos-next.run",
         "title": "Run"
+      },
+      {
+        "command": "vscode-harmonyos-next.createArkTS",
+        "title": "ArkTS"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "group": "navigation",
+          "command": "vscode-harmonyos-next.helloWorld"
+        },
+        {
+          "submenu": "harmonyos-next.create-submenu",
+          "group": "harmonyos",
+          "when": "explorerResourceIsFolder"
+        }
+      ],
+      "harmonyos-next.create-submenu": [
+        {
+          "command": "vscode-harmonyos-next.createArkTS"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "harmonyos-next.create-submenu",
+        "label": "Create Ark..."
       }
     ]
   },
