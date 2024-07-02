@@ -45,11 +45,11 @@ export function activate (context: vscode.ExtensionContext) {
 	const clientOptions: LanguageClientOptions = {
 		documentSelector: [
 			{
-				// pattern: '**​/*.ets',
-				// language: 'ets',
+				pattern: '**/*.ets',
+				language: 'ets',
 				scheme: 'file',
 			}
-		]
+		],
 	};
 
 	client = new LanguageClient(

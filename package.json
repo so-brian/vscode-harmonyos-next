@@ -54,6 +54,17 @@
         "id": "harmonyos-next.create-submenu",
         "label": "Create Ark..."
       }
+    ],
+    "languages": [
+      {
+        "id": "ets",
+        "aliases": [
+          "Arch TS"
+        ],
+        "extensions": [
+          ".ets"
+        ]
+      }
     ]
   },
   "scripts": {
