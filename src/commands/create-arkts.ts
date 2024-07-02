@@ -15,7 +15,7 @@ export class CreateArkTSCommand extends Command {
 		super('vscode-harmonyos-next.createArkTS');
 	}
 
-	run(args: CreateArkTSEventArgs) {
+	run (args: CreateArkTSEventArgs) {
 		console.log(args.path);
 		vscode.window.showInputBox({
 			prompt: 'Enter file name',
@@ -29,7 +29,7 @@ export class CreateArkTSCommand extends Command {
 		// vscode.window.showInformationMessage('Create Ark TS');
 	}
 
-	private createComponent(directory: string, file: string) {
+	private createComponent (directory: string, file: string) {
 		const filePath = directory + '/' + file;
 		fs.writeFileSync(filePath, '');
 		console.log('New .ts file created at:', filePath);
