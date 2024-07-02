@@ -66,7 +66,7 @@
   },
   "dependencies": {
     "vscode-languageclient": "^9.0.1",
-    "ets-lsp": "^0.0.2"
+    "ets-lsp": "^0.0.3"
   },
   "devDependencies": {
     "@types/vscode": "^1.87.0",
