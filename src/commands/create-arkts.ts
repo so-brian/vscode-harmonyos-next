@@ -23,7 +23,9 @@ export class CreateArkTSCommand extends Command {
 			valueSelection: [0, 9]
 		}).then((fileName) => {
 			if (fileName) {
-				this.createComponent(args.path, fileName);
+				const filePath = args.path + '/' + fileName;
+				fs.writeFileSync(filePath, '');
+				console.log('New .ts file created at:', filePath);
 			}
 		});
 		// vscode.window.showInformationMessage('Create Ark TS');
