@@ -15,7 +15,7 @@
     "Other"
   ],
   "activationEvents": [],
-  "main": "./out/extension.js",
+  "main": "./dist/client.js",
   "contributes": {
     "commands": [
       {
@@ -63,6 +63,10 @@
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "vscode-test"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1",
+    "ets-lsp": "^0.0.2"
   },
   "devDependencies": {
     "@types/vscode": "^1.87.0",
